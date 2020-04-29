@@ -1,0 +1,1 @@
+export * from './bar-chart1.component'

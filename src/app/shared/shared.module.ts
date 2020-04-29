@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PopulationService } from './service';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
   ],
-  exports:[],
-  providers:[]
+  exports:[
+  ],
+  providers:[PopulationService]
 })
 export class SharedModule { }

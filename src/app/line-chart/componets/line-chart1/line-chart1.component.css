@@ -1,0 +1,9 @@
+svg{
+    background-color: #eee;
+}
+
+.line{
+    fill:none;
+    stroke: #4682B4;
+    stroke-width: 2;
+}
