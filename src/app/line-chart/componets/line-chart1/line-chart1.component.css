@@ -7,3 +7,9 @@ svg{
     stroke: #4682B4;
     stroke-width: 2;
 }
+.y-axis-title{
+    stroke: black;
+    stroke-width: 0.1px;
+    fill:#000;
+    font-size:14px;
+}

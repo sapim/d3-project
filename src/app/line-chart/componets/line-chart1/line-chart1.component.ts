@@ -39,22 +39,26 @@ export class LineChart1Component implements OnInit {
       .append("g")
       .attr("transform", `translate(${this.margin.left},${this.margin.top})`);
   }
-  
+
   initAxis() {
-    this.x = d3Scale.scaleTime().range([0, this.width]);
-    this.x.domain(
-      d3Array.extent(
-        this.populationService.getPopulationInTotal,
-        (d) => d.year
-      )
-      )
-    this.y = d3Scale.scaleLinear().range([this.height, 0]);
-    this.y.domain(
-      d3Array.extent(
-        this.populationService.getPopulationInTotal,
-        (d) => d.population
-      )
-    );
+    this.x = d3Scale
+      .scaleTime()
+      .range([0, this.width])
+      .domain(
+        d3Array.extent(
+          this.populationService.getPopulationInTotal,
+          (d) => d.year
+        )
+      );
+    this.y = d3Scale
+      .scaleLinear()
+      .range([this.height, 0])
+      .domain(
+        d3Array.extent(
+          this.populationService.getPopulationInTotal,
+          (d) => d.population
+        )
+      );
   }
 
   drawAxis() {
@@ -62,7 +66,16 @@ export class LineChart1Component implements OnInit {
       .append("g")
       .call(d3Axis.axisBottom(this.x))
       .attr("transform", `translate(0,${this.height})`);
-    this.svg.append("g").call(d3Axis.axisLeft(this.y));
+    this.svg
+      .append("g")
+      .call(d3Axis.axisLeft(this.y))
+      .append("text")
+      .attr("class", "y-axis-title")
+      .attr('transform','rotate(-90)')
+      .attr('dy','2em')//调整水平单位偏离距离，默认偏移1个dy
+      // .attr('y',6) 向右偏移几个dy
+      .style("text-anchor", "end") //标签末尾与y轴顶端对齐
+      .text("人口(万人)");
   }
 
   drawLine() {
