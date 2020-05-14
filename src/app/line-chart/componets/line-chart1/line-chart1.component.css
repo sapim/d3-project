@@ -13,3 +13,12 @@ svg{
     fill:#000;
     font-size:14px;
 }
+.dot:hover circle{
+    fill:yellow;
+    color:#000;
+    font-weight: 600;
+}
+.dot:hover text{
+    color:#000;
+    font-weight: 600;
+}

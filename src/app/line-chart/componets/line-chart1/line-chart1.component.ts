@@ -19,11 +19,12 @@ export class LineChart1Component implements OnInit {
   private x: any;
   private y: any;
   private svg: any;
+  private dots: any;
   private line: d3Shape.Line<[number, number]>;
 
   constructor(private populationService: PopulationService) {
-    this.width = 800 - this.margin.right - this.margin.left;
-    this.height = 400 - this.margin.top - this.margin.bottom;
+    this.width = 1000 - this.margin.right - this.margin.left;
+    this.height = 300 - this.margin.top - this.margin.bottom;
   }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class LineChart1Component implements OnInit {
     this.initAxis();
     this.drawAxis();
     this.drawLine();
+    this.drawDots();
   }
 
   initSvg() {
@@ -71,8 +73,8 @@ export class LineChart1Component implements OnInit {
       .call(d3Axis.axisLeft(this.y))
       .append("text")
       .attr("class", "y-axis-title")
-      .attr('transform','rotate(-90)')
-      .attr('dy','2em')//调整水平单位偏离距离，默认偏移1个dy
+      .attr("transform", "rotate(-90)")
+      .attr("dy", "2em") //调整水平单位偏离距离，默认偏移1个dy
       // .attr('y',6) 向右偏移几个dy
       .style("text-anchor", "end") //标签末尾与y轴顶端对齐
       .text("人口(万人)");
@@ -88,5 +90,28 @@ export class LineChart1Component implements OnInit {
       .attr("class", "line")
       .datum(this.populationService.getPopulationInTotal)
       .attr("d", this.line);
+  }
+
+  drawDots() {
+    this.dots = this.svg
+      .append("g")
+      .attr("class", "dots")
+      .selectAll("circle")
+      .data(this.populationService.getPopulationInTotal)
+      .enter()
+      .append("g")
+      .attr("class", "dot");
+    this.dots
+      .append("circle")
+      .attr("cx", (d) => this.x(d.year))
+      .attr("cy", (d) => this.y(d.population))
+      .attr("r", 3.5)
+      .attr("fill", "steelblue");
+    this.dots
+      .append("text")
+      .attr("dx", (d) => this.x(d.year) + 10)
+      .attr("dy", (d) => this.y(d.population) + 5)
+      .text((d) => d.population)
+      .attr("font-size", "8px");
   }
 }

@@ -22,7 +22,6 @@ export class LineChart2Component implements OnInit {
   private keys: string[] = ["birthRate", "deathRate", "naturalIncreaseRate"];
   private width: number;
   private height: number;
-  private footHeight: number = 50;
   private birthLine: d3Shape.Line<[number, number]>;
   private deathLine: d3Shape.Line<[number, number]>;
   private narturalIncreaseLine: d3Shape.Line<[number, number]>;
@@ -30,7 +29,7 @@ export class LineChart2Component implements OnInit {
 
   constructor(private populationService: PopulationService) {
     this.width = 800 - this.margin.left - this.margin.right;
-    this.height = 400 - this.margin.top - this.margin.bottom - this.footHeight;
+    this.height = 400 - this.margin.top - this.margin.bottom ;
   }
 
   ngOnInit() {

@@ -15,12 +15,12 @@ export interface Rate{
 @Injectable({providedIn:'root'})
 export class PopulationService {
     populationInTotal: Population[] = [
-        {year:new Date('1949'), population:54167},
-        {year:new Date('1950'), population:55196},
-        {year:new Date('1951'), population:56300},
-        {year:new Date('1955'), population:61465},
-        {year:new Date('1960'), population:66207},
-        {year:new Date('1965'), population:72538},
+        // {year:new Date('1949'), population:54167},
+        // {year:new Date('1950'), population:55196},
+        // {year:new Date('1951'), population:56300},
+        // {year:new Date('1955'), population:61465},
+        // {year:new Date('1960'), population:66207},
+        // {year:new Date('1965'), population:72538},
         {year:new Date('1970'), population:82992},
         {year:new Date('1971'), population:85229},
         {year:new Date('1972'), population:87177},
