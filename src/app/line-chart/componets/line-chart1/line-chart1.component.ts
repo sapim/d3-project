@@ -20,6 +20,7 @@ export class LineChart1Component implements OnInit {
   private y: any;
   private svg: any;
   private dots: any;
+  private grid: any;
   private line: d3Shape.Line<[number, number]>;
 
   constructor(private populationService: PopulationService) {
@@ -31,6 +32,7 @@ export class LineChart1Component implements OnInit {
     this.initSvg();
     this.initAxis();
     this.drawAxis();
+    this.drawGrid();
     this.drawLine();
     this.drawDots();
   }
@@ -78,6 +80,35 @@ export class LineChart1Component implements OnInit {
       // .attr('y',6) 向右偏移几个dy
       .style("text-anchor", "end") //标签末尾与y轴顶端对齐
       .text("人口(万人)");
+  }
+
+  drawGrid() {
+    let x = d3Scale
+      .scaleLinear()
+      .domain([0, 1])
+      .range([0, this.width]);
+    let y = d3Scale
+      .scaleLinear()
+      .domain([0, 1])
+      .range([this.height , 0]);
+    this.grid = this.svg.append('g')
+      .selectAll(".grid")
+      .data(x.ticks(10))//显示10个刻度
+      .enter()
+      .append("g")
+      .attr("class", "grid")
+    // 添加格子竖线
+    this.grid.append('line')
+    .attr('x1',x)
+    .attr('x2',x)
+    .attr('y1',0)
+    .attr('y2',this.height)
+    // 添加格子横线
+    this.grid.append('line')
+    .attr('y1',y)
+    .attr('y2',y)
+    .attr('x1',0)
+    .attr('x2',this.width )
   }
 
   drawLine() {
